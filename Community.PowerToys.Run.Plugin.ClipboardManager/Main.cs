@@ -85,7 +85,7 @@ namespace Community.PowerToys.Run.Plugin.ClipboardManager
         private Result CreateResult(ClipboardHistoryItem item, string text) 
             => new Result()
             {
-                Title = text.Trim(),
+                Title = text.Trim().Replace("\r\n", "↩").Replace("\r", "↩").Replace("\n", "↩"),
                 SubTitle = "Paste this value.",
                 IcoPath = _iconPath,
                 Action = (context) =>
@@ -94,7 +94,7 @@ namespace Community.PowerToys.Run.Plugin.ClipboardManager
                     Task.Run(() => RunAsSTAThread(() =>
                     {
                         Thread.Sleep(_beginTypeDelay);
-                        SendKeys.SendWait("^(v)");
+                        //SendKeys.SendWait("^(v)");
                     }));
                     return true;
                 },
